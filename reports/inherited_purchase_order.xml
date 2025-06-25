@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="purchase_order_inherit_report" model="report.paperformat">
+            <field name="name">A4 without borders</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+        </record>
+
+
+        <record id="purchase_order_inheriting_id" model="ir.actions.report">
+            <field name="name"> New Purchase Details</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">om_hospital.report_custom_purchase_template_id</field>
+            <field name="report_file">om_hospital.report_custom_purchase_template_id</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="om_hospital.purchase_order_inherit_report"/>
+        </record>
+
+
+    </data>
+</odoo>

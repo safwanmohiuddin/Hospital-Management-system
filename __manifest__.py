@@ -1,0 +1,26 @@
+{
+    'name':"Hospital Management system",
+    'author': "Safwan Mohiuddin",
+    "license": "LGPL-3",
+    "version":"18.0.0.0",
+    "depends":['sale','purchase', 'accountant','product'],
+    "data": ['security/security.xml',
+             "security/ir.model.access.csv",
+             "reports/report_action.xml",
+             "reports/report_template.xml",
+             "data/sequence.xml",
+             "views/patient_views.xml",
+             "views/patient_readonly_views.xml",
+             "views/appointment_views.xml",
+             "views/appointment_line_views.xml",
+             "views/patient_tag_views.xml",
+             "views/menu.xml",
+             'reports/inherited_sale_order_action.xml',
+             'reports/inherited_template.xml',
+             'reports/inherited_purchase_order.xml',
+             'reports/inherited_purchase_order_template.xml',
+             'reports/existing_account_action.xml',
+             'reports/existing_account_template.xml',
+
+             ]
+}

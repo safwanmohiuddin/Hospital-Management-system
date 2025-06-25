@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_custom_credit_note_notice" inherit_id="account.report_invoice_document">
+
+            <!-- Insert credit note message above the table -->
+            <xpath expr="//table[@name='invoice_line_table']" position="before">
+                <t t-if="o.move_type == 'out_refund'">
+                    <div style="margin: 20px 0; padding: 15px; background-color: #fff3cd; border-left: 5px solid #ffc107;">
+                        <p style="font-style: italic; color: #856404; font-weight: bold;">
+                            ⚠ This is a Credit Note — not a valid invoice.
+                        </p>
+                        <p>
+                            This document reverses a previously issued invoice. Please update your records accordingly.
+                        </p>
+                        <p>
+                            <strong>Issued Date:</strong> <span t-field="o.date" /><br/>
+                            <strong>Original Invoice:</strong> <span t-field="o.reversed_entry_id.name" />
+                        </p>
+                        <p>
+                            <strong>Prepared By:</strong> Accounts Department<br/>
+                            <strong>Company Email:</strong> info@yourcompany.com
+                        </p>
+                        <p style="font-size: 11px; color: #777;">
+                            Note: This document is system-generated and does not require a signature.
+                        </p>
+                    </div>
+                </t>
+            </xpath>
+
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+
+<odoo>
+    <data>
+
+        <!-- Optional custom paper format -->
+        <record id="report_credit_note_paperformat" model="report.paperformat">
+            <field name="name">A4 without borders</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+        </record>
+
+        <!-- Patch the existing report to use new paper format -->
+        <record id="account.account_invoices" model="ir.actions.report">
+            <field name="paperformat_id" ref="om_hospital.report_credit_note_paperformat"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,31 @@
+
+<odoo>
+    <data>
+        <!-- Paper Format -->
+        <record id="om_hospital_paper_format" model="report.paperformat">
+            <field name="name">Hospital Patient Information</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- Report Action -->
+        <record id="om_hospital_report_action" model="ir.actions.report">
+            <field name="name">Appointments</field>
+            <field name="model">hospital.appointment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">om_hospital.om_hospital_template_id</field>
+            <field name="report_file">mto_internee.om_hospital_template_id</field>
+            <field name="print_report_name">'Appointment Details June 2025'</field>
+            <field name="paperformat_id" ref="om_hospital.om_hospital_paper_format"/>
+            <field name="binding_model_id" ref="model_hospital_appointment"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

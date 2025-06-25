@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_category_hospital">
+            <field name="name">Hospital</field>
+            <field name="sequence">5</field>
+        </record>
+
+        <!--RECEPTIONIST GROUP USER -->
+        <record id="group_hospital_receptionist" model="res.groups">
+            <field name="name">Receptionist</field>
+            <field name="category_id" ref="om_hospital.module_category_hospital"/>
+            <!-- The ref in this follows the syntax: modulename.category_id_name -->
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="comment">This User will have access to appointments.</field>
+        </record>
+
+        <!--DOCTOR GROUP USER -->
+        <record id="group_hospital_doctor" model="res.groups">
+            <field name="name">Doctor</field>
+            <field name="category_id" ref="om_hospital.module_category_hospital"/>
+            <!-- The ref in this follows the syntax: modulename.category_id_name -->
+            <field name="implied_ids" eval="[(4, ref('om_hospital.group_hospital_receptionist'))]"/>
+            <!-- The ref is to inherit the user meaning, if the user is receptionist, doctor can view it too -->
+            <field name="comment">This User will have access to patient details.</field>
+        </record>
+
+        <!--RECORD ROLES For Receptionist-->
+        <record id="receptionist_appointment_rule" model="ir.rule">
+            <field name="name">receptionist: view own records</field>
+            <field name="model_id" ref="model_hospital_appointment"/>
+            <field name="groups" eval="[(4, ref('om_hospital.group_hospital_receptionist'))]"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        </record>
+
+        <record id="doctor_appointment_rule" model="ir.rule">
+            <field name="name">doctor: can see all records</field>
+            <field name="model_id" ref="model_hospital_appointment"/>
+            <field name="groups" eval="[(4, ref('om_hospital.group_hospital_doctor'))]"/>
+            <field name="domain_force">[]</field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+           <!--PAPER FORMAT -->
+        <record id="paperformat_order_report" model="report.paperformat">
+            <field name="name">A4 without borders</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+        </record>
+
+<!--        INHERITANCE FORMAT-->
+        <record id="sale_order_inheriting_id" model="ir.actions.report">
+            <field name="name">New Sale Order</field> <!--this is shown on the pdf dropdown-->
+            <field name="model">sale.order</field>   <!--this is the inherited model name -->
+            <field name="report_type">qweb-pdf</field>     <!--standard code, the qweb can be qweb-pdf, html and others -->
+            <field name="report_name">om_hospital.report_custom_order_template_id</field>  <!-- syntax: (MODULE NAME).(QWEB TEMPLATE ID DEFINED IN TEMPLATE XML) -->
+                                                                                           <!-- It points to the template which controls how the pdf looks like -->
+            <field name="report_file">om_hospital.report_custom_order_template_id</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field> <!-- This can be static, this current syntax is based on status (draft, complete) -->
+            <field name="binding_model_id" ref="sale.model_sale_order"/>   <!-- the reference for sale.order model. look at metadata for the model being inherited -->
+            <field name="binding_type">report</field> <!-- the "report" ensures this comes under print button -->
+            <field name="binding_view_types">form</field>
+            <field name="paperformat_id" ref="om_hospital.paperformat_order_report"/>   <!-- reference syntax: (module name).(PAPER FORMAT id) -->
+                                                                                        <!-- this connects to the custom format I defined in this file -->
+        </record>
+
+
+    </data>
+</odoo>
