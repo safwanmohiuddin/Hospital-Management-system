@@ -3,10 +3,10 @@ from odoo import api, fields, models #keep 2 lines empty after this
 class HospitalAppointment(models.Model):
     _name = "hospital.appointment" #Name should have .
     _description = "Appointment Details"
-    _rec_names_search = ['reference','patient_id']
+    _rec_names_search = ['reference','patient_id'] #to search with name and reference
     _rec_name = 'patient_id'
 
-    reference = fields.Char(string = "Reference", default = "New")
+    reference = fields.Char(string = "Reference", default = "New") #For unique ID
     patient_id = fields.Many2one('hospital.patient', string = "Patient", ondelete = 'restrict')
     date_appointment = fields.Date(string = "Date")
     note = fields.Text(string = "note")

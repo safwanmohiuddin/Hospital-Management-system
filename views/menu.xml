@@ -10,6 +10,7 @@
                   name = "Front Desk"
                   parent = "menu_hospital_root"/>
 
+
         <menuitem id="menu_patients"
                   name = "Patients"
                   parent = "menu_frontdesk"
